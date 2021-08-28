@@ -1,0 +1,52 @@
+
+:root {
+  --white: #efe;
+  --black: #101;
+}
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  background: var(--white);
+}
+
+.game-grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 420px;
+  height: 420px;
+  border: solid black;
+  margin: auto;
+}
+
+.game-grid div {
+  width: 15px;
+  height: 15px;
+}
+
+/* GAME GRID SQUARES */
+.pac-dot {
+  background-color: green;
+  border: 5px solid var(--white, white);
+  box-sizing: border-box;
+}
+
+.wall {
+  background-color: blue;
+}
+
+.power-pellet {
+  background-color: green;
+  border-radius: 50%;
+}
+
+.empty, .lair {
+  background: var(--white, white);
+}
+
+.pacman {
+  background-color: orange;
+  border-radius: 50%;
+  border: none;
+}
