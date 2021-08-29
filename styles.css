@@ -2,13 +2,22 @@
 :root {
   --white: #efe;
   --black: #101;
+  --blue: #325B9A;
+  --yellow: #EADB55;
+  --purple: #C4A899;
 }
 
 html, body {
   margin: 0px;
   padding: 0px;
   text-align: center;
-  background: var(--white);
+  background: var(--black, black);
+  color: var(--white, white);
+  font-family: 'Cabin', sans-serif;
+}
+
+h1 {
+  color: var(--yellow, yellow);
 }
 
 .game-grid {
@@ -16,8 +25,10 @@ html, body {
   flex-wrap: wrap;
   width: 420px;
   height: 420px;
-  border: solid black;
+  border: solid var(--white, white);
   margin: auto;
+  /* box-shadow: 0 5px 15px rgba(0,0,0,0.25); */
+  border-radius: 3px;
 }
 
 .game-grid div {
@@ -27,13 +38,13 @@ html, body {
 
 /* GAME GRID SQUARES */
 .pac-dot {
-  background-color: green;
-  border: 5px solid var(--white, white);
+  background-color: var(--purple, green);
+  border: 5px solid var(--black, black);
   box-sizing: border-box;
 }
 
 .wall {
-  background-color: blue;
+  background-color: var(--blue, blue);
 }
 
 .power-pellet {
@@ -41,12 +52,12 @@ html, body {
   border-radius: 50%;
 }
 
-.empty, .lair {
-  background: var(--white, white);
+.empty, .ghost-lair {
+  background: var(--black, black);
 }
 
 .pacman {
-  background-color: orange;
+  background-color: var(--yellow, orange);
   border-radius: 50%;
   border: none;
 }

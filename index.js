@@ -2,6 +2,7 @@ const grid = document.querySelector('.game-grid');
 const score = document.querySelector('#score');
 const width = 28;
 let squares = [];
+let playerScore = 0;
 
   //28 * 28 = 784
   // 0 - pac-dots
@@ -50,7 +51,7 @@ function createBoard() {
     } else if (item === 1) {
       square.classList.add('wall')
     } else if (item === 2) {
-      square.classList.add('lair')
+      square.classList.add('ghost-lair')
     } else if (item === 3) {
       square.classList.add('power-pellet')
     } else if (item === 4) {
@@ -81,25 +82,53 @@ function controls(e) {
 
   switch(e.key) {
     case 'ArrowLeft':
-      if (pacmanCurrentIndex % width !== 0) pacmanCurrentIndex -=1;
-      console.log('pressed left');
+      if (
+          pacmanCurrentIndex % width !== 0 && 
+          !squares[pacmanCurrentIndex - 1].classList.contains('wall')
+      ) { pacmanCurrentIndex -=1; }
+      if (pacmanCurrentIndex === 364) {
+        pacmanCurrentIndex = 391;
+      }
       break;
     case 'ArrowUp':
-      if (pacmanCurrentIndex - width >= 0) pacmanCurrentIndex -=28;
-      console.log('pressed up');
+      if (
+        pacmanCurrentIndex - width >= 0 && 
+        !squares[pacmanCurrentIndex - width].classList.contains('wall')
+        ) { pacmanCurrentIndex -= width };
       break;
     case 'ArrowRight':
-      if (pacmanCurrentIndex % width < width - 1) pacmanCurrentIndex +=1;
-      console.log('pressed right');
-      console.log(pacmanCurrentIndex % width);
-      break;
+      if (
+        pacmanCurrentIndex % width < width - 1 && 
+        !squares[pacmanCurrentIndex + 1].classList.contains('wall')
+        ) { pacmanCurrentIndex +=1; }
+      if (pacmanCurrentIndex === 391) {
+        pacmanCurrentIndex = 364;
+      }
+    break;
     case 'ArrowDown':
-      if (pacmanCurrentIndex + width < 28**2) pacmanCurrentIndex +=28;
-      console.log('pressed down');
+      if (
+          pacmanCurrentIndex + width < width**2 && 
+          !squares[pacmanCurrentIndex + width].classList.contains('wall') &&
+          !squares[pacmanCurrentIndex + width].classList.contains('ghost-lair')
+      ) { pacmanCurrentIndex += width; }
       break;
   }
 
   squares[pacmanCurrentIndex].classList.add('pacman');
+  pacDotEaten();
 }
 
 document.addEventListener('keyup', controls);
+// document.addEventListener('keydown', controls);
+
+
+// PACMAN EATING
+// --------------------------------------------
+
+function pacDotEaten() {
+  if(squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
+    squares[pacmanCurrentIndex].classList.remove('pac-dot');
+    playerScore++;
+    score.innerHTML = playerScore;
+  }
+}
