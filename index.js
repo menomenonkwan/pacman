@@ -227,7 +227,7 @@ function checkForGameOver() {
 
 // GAME WIN
 function checkForWin() {
-  if (playerScore === 274) {
+  if (playerScore >= 274) {
     ghosts.forEach(ghost => clearInterval(ghost.timerId));
     document.removeEventListener('keyup', controls);
     score.innerHTML = 'You Win, Buddy!';
